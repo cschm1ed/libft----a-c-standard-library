@@ -6,7 +6,7 @@
 /*   By: christianschmiedt <christianschmiedt@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:33:33 by cschmied          #+#    #+#             */
-/*   Updated: 2023/01/13 12:58:17 by christiansc      ###   ########.fr       */
+/*   Updated: 2023/04/03 17:28:47 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	new -> next = *lst;
+	new->next = *lst;
 	*lst = new;
 	return ;
 }

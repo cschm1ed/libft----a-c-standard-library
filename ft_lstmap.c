@@ -6,12 +6,12 @@
 /*   By: christianschmiedt <christianschmiedt@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 19:42:45 by cschmied          #+#    #+#             */
-/*   Updated: 2023/01/13 14:58:50 by christiansc      ###   ########.fr       */
+/*   Updated: 2023/04/03 17:30:23 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// The function ft_lstmap() iterates the linked-list 'lst', and creates a new 
-// list resulting of the successive applications of the function 'f' to the 
+// The function ft_lstmap() iterates the linked-list 'lst', and creates a new
+// list resulting of the successive applications of the function 'f' to the
 // content of each node.
 
 #include "libft.h"
@@ -22,12 +22,12 @@ static t_list	*delete_node(t_list *node, t_list *head, void (*del)(void *))
 
 	while (head != node)
 	{
-		del(head -> content);
+		del(head->content);
 		tmp = head;
 		ft_lstdelone(head, del);
-		head = tmp -> next;
+		head = tmp->next;
 	}
-	del(node -> content);
+	del(node->content);
 	ft_lstdelone(node, del);
 	return (NULL);
 }
@@ -39,21 +39,21 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst)
 		return (NULL);
-	head = ft_lstnew(f(lst -> content));
+	head = ft_lstnew(f(lst->content));
 	if (!head)
 	{
-		del(head -> content);
+		del(head->content);
 		ft_lstdelone(head, del);
 		return (NULL);
 	}
-	lst = lst -> next;
+	lst = lst->next;
 	while (lst)
 	{
-		node = ft_lstnew(f(lst -> content));
+		node = ft_lstnew(f(lst->content));
 		if (!node)
 			return (delete_node(node, head, del));
 		ft_lstadd_back(&head, node);
-		lst = lst -> next;
+		lst = lst->next;
 	}
 	return (head);
 }

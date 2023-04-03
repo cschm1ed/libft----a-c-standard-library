@@ -6,17 +6,17 @@
 #    By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/30 22:21:59 by cschmied          #+#    #+#              #
-#    Updated: 2023/01/16 13:27:00 by cschmied         ###   ########.fr        #
+#    Updated: 2023/04/03 17:26:59 by cschmied         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-			 ft_lstmap.c
+SRCS_BONUS		:= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+			 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+			 		ft_lstmap.c
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+OBJS_BONUS 		:= $(SRCS_BONUS:.c=.o)
 
-SRCS =  ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memcmp.c 	\
+SRCS := ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memcmp.c 	\
     	ft_memmove.c ft_strchr.c ft_strlcpy.c ft_strncmp.c ft_strrchr.c \
 		ft_toupper.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_memchr.c 	\
 		ft_memcpy.c ft_memset.c ft_strlcat.c ft_strlen.c ft_strnstr.c 	\
@@ -26,37 +26,35 @@ SRCS =  ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memcmp.c 	\
 		print_char.c print_decimal.c print_hexpointer.c print_itohex_lower.c \
 		print_itohex_upper.c print_string.c print_unsignedi.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS 		:= $(SRCS:.c=.o)
 
-NAME = libft.a
+NAME 		:= libft.a
 
-CC = cc
+CC 			:= cc
 
-AR = ar rcs
+AR 			:= ar rcs
 
-VPATH = ft_printf
+VPATH 		:= ft_printf
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS 		:= -Wall -Werror -Wextra -O2
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
 
-.PHONY: all
-all:
-	make $(NAME)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean
+.PHONY: all clean fclean re bonus
+
+all: $(NAME)
+
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
-.PHONY: fclean
 fclean: clean
-	rm -f $(NAME)
 
-.PHONY: re
 re: fclean all
 
-.PHONY:	bonus
 bonus:	$(NAME) $(OBJS) $(OBJS_BONUS)
 	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 

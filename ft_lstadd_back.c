@@ -6,7 +6,7 @@
 /*   By: christianschmiedt <christianschmiedt@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 19:18:51 by cschmied          #+#    #+#             */
-/*   Updated: 2023/01/13 12:57:49 by christiansc      ###   ########.fr       */
+/*   Updated: 2023/04/03 17:28:36 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	ptr -> next = new;
+	ptr->next = new;
 	return ;
 }
