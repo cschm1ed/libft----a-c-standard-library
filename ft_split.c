@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christianschmiedt <christianschmiedt@st    +#+  +:+       +#+        */
+/*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:51:30 by christiansc       #+#    #+#             */
-/*   Updated: 2023/01/13 14:33:26 by christiansc      ###   ########.fr       */
+/*   Updated: 2023/04/09 14:55:36 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static int	count_strs(char const *s, char c)
 	return (counter);
 }
 
-static char	**free_strs(char ***strs, int wc)
+void	**free_strs(char ***strs, int wc)
 {
 	int	i;
 
 	i = 0;
 	while (i < wc)
 		free((*strs)[i]);
-	return (NULL);
+	free(*strs);
 }
 
 char	**split(const char *s, char c, char **strs, int words)
@@ -83,7 +83,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	ptr = malloc(sizeof(char *) * (count_strs(s, c) + 1));
+	ptr = ft_calloc(sizeof(char *), (count_strs(s, c) + 1));
 	if (!ptr)
 		return (NULL);
 	ptr[count_strs(s, c)] = 0;
