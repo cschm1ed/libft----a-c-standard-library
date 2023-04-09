@@ -6,7 +6,7 @@
 /*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:51:30 by christiansc       #+#    #+#             */
-/*   Updated: 2023/04/09 17:02:11 by cschmied         ###   ########.fr       */
+/*   Updated: 2023/04/09 23:36:59 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static char	**free_strs(char ***strs, int wc)
 	i = 0;
 	while (i < wc)
 		free((*strs)[i]);
+	free(*strs);
 	return (NULL);
 }
 
