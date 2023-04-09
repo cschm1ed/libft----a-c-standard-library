@@ -6,17 +6,31 @@
 /*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:51:30 by christiansc       #+#    #+#             */
-/*   Updated: 2023/04/09 14:55:36 by cschmied         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:02:11 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// The ft_split() function eturns an array of strings obtained by splitting 
+// The ft_split() function eturns an array of strings obtained by splitting
 // the string ’s’ using the	character ’c’ as a delimiter.
 // The returned array ends with a NULL pointer.
 
 #include "libft.h"
 
-static int	count_strs(char const *s, char c)
+static int	char_is_in_set(char c, char *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	count_strs(char const *s, char *c)
 {
 	int	i;
 	int	counter;
@@ -25,14 +39,14 @@ static int	count_strs(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (char_is_in_set(s[i], c))
 		{
-			while (s[i] == c && s[i])
+			while (s[i] && char_is_in_set(s[i], c))
 				i ++;
 		}
 		else
 		{
-			while (s[i] != c && s[i])
+			while (s[i] && !char_is_in_set(s[i], c))
 				i ++;
 			counter ++;
 		}
@@ -40,17 +54,17 @@ static int	count_strs(char const *s, char c)
 	return (counter);
 }
 
-void	**free_strs(char ***strs, int wc)
+static char	**free_strs(char ***strs, int wc)
 {
 	int	i;
 
 	i = 0;
 	while (i < wc)
 		free((*strs)[i]);
-	free(*strs);
+	return (NULL);
 }
 
-char	**split(const char *s, char c, char **strs, int words)
+char	**split(const char *s, char *c, char **strs, int words)
 {
 	int	i;
 	int	len;
@@ -61,13 +75,13 @@ char	**split(const char *s, char c, char **strs, int words)
 	len = 0;
 	while (s[i] && word_count < words)
 	{
-		while (s[i] == c && s[i])
+		while (s[i] && char_is_in_set(s[i], c))
 			i ++;
-		while (s[i] != c && s[i])
+		while (s[i] && !char_is_in_set(s[i], c))
 		{
 			i ++;
 			len ++;
-		}		
+		}
 		strs[word_count] = ft_substr(s, i - len, len);
 		if (!(strs[word_count]))
 			return (free_strs(&strs, word_count));
@@ -77,7 +91,7 @@ char	**split(const char *s, char c, char **strs, int words)
 	return (strs);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
 	char	**ptr;
 
