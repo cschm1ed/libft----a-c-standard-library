@@ -56,6 +56,7 @@ Linked Lists
 
 printing strings
 
+    ft_printf
     ft_putchar_fd
     ft_putendl_fd
     ft_putnbr_fd
