@@ -6,7 +6,7 @@
 /*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:58:30 by cschmied          #+#    #+#             */
-/*   Updated: 2023/04/09 17:02:37 by cschmied         ###   ########.fr       */
+/*   Updated: 2023/04/22 10:52:17 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../get_next_line/includes/get_next_line.h"
 
 typedef struct s_list
 {
