@@ -12,11 +12,13 @@
 
 VPATH			:=  sources:ft_printf:get_next_line/sources
 
+BUILDDIR		:= build
+
 SRCS_BONUS		:=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 			 		ft_lstmap.c
 
-OBJS_BONUS 		:= $(SRCS_BONUS:.c=.o)
+OBJS_BONUS 		:= $(SRCS_BONUS:%.c=$(BUILDDIR)/%.o)
 
 SRCS_GNL		:= get_next_line.c get_next_line_utils.c
 
@@ -30,7 +32,7 @@ SRCS := 			ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memcmp.c 	\
 					print_char.c print_decimal.c print_hexpointer.c print_itohex_lower.c \
 					print_itohex_upper.c print_string.c print_unsignedi.c $(SRCS_GNL)
 
-OBJS 				:= $(SRCS:.c=.o)
+OBJS 				:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
 NAME 				:= libft.a
 
@@ -43,15 +45,18 @@ CFLAGS 				:= -Wall -Werror -Wextra -O2
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
 
-%.o: %.c
+$(BUILDDIR)/%.o: %.c $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILDDIR):
+	@mkdir $(BUILDDIR)
 
 .PHONY: all clean fclean re bonus
 
 all: $(NAME)
 
 clean:
-	@rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -rf $(BUILDDIR)
 
 fclean: clean
 	@rm -f $(NAME)
@@ -60,4 +65,3 @@ re: fclean all
 
 bonus:	$(NAME) $(OBJS) $(OBJS_BONUS)
 	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
-
