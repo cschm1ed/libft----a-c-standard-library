@@ -28,9 +28,7 @@ char	*read_line_to_buffer(int fd, char **buffer, int *eof)
 {
 	int		r_val;
 	char	*tmp;
-	char	*endchar;
 
-	endchar = buffer[0] + BUFFER_SIZE;
 	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!tmp)
 		return (NULL);
