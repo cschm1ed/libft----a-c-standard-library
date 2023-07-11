@@ -30,7 +30,8 @@ SRCS := 			ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memcmp.c 	\
 					ft_strtrim.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c	 \
 					ft_putstr_fd.c ft_putendl_fd.c ft_split.c ft_putnbr_fd.c ft_printf.c \
 					print_char.c print_decimal.c print_hexpointer.c print_itohex_lower.c \
-					print_itohex_upper.c print_string.c print_unsignedi.c $(SRCS_GNL)
+					print_itohex_upper.c print_string.c print_unsignedi.c $(SRCS_GNL) \
+					ft_strcmp.c $(SRCS_BONUS)
 
 OBJS 				:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
@@ -40,7 +41,7 @@ CC 					:= cc
 
 AR 					:= ar rcs
 
-CFLAGS 				:= -Wall -Werror -Wextra -O2
+CFLAGS 				:= -Wall -Werror -Wextra -O0 -g
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)

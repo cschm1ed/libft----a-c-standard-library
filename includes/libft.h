@@ -16,11 +16,20 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../get_next_line/includes/get_next_line.h"
+# include "../../includes/minirt.h"
+# include "../../includes/structs.h"
 
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
+    void			*content;
+    struct s_list	*next;
+    int 			(*intersection)(void *object, t_line line, t_vector *result);
+    t_vector 		(*surface_normal)(void *object, t_line line, t_vector point);
+    t_vector		(*get_colour)(t_list *self);
+    double          diffuse;
+    double          specular;
+    double          reflective;
+    int				flag;
 }					t_list;
 
 int		ft_atoi(const char *str);
@@ -58,7 +67,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-
+int     ft_strcmp(const char *str1, const char *str2);
 //bonus
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
